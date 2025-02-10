@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "express": "^4.21.2",
+    "mongose": "^0.0.2-security",
     "nodemon": "^3.1.9"
   }
 }
