@@ -12,7 +12,7 @@ const salt = bcrypt.genSaltSync(saltRounds); // Définie le nombre d'opération 
 module.exports = {
     async register(req, res) {
         try{
-            const newUser = await User(req.body);
+            const newUser = await new User(req.body);
             // créer un mot de passe chiffré ! avec la librairie bcrypt
             newUser.hashedPassword = bcrypt.hashSync(req.body.password, salt); // hashSync prend en parametres 2 éléments (mot de passe creer par le user, salt) 
             await newUser.save(); // la sauvegarde du User
@@ -20,8 +20,11 @@ module.exports = {
             // Par soucis de securité, on envoie un object de reponse au User
             const userObj = newUser.toObject(); // convertir le newUser en object
             delete userObj.hashedPassword; // supprimer avant de renvoyer l'object dans la reponse qui sera lu et afficher coté client !
-            res.statut(200).json(userObj); // affichage de l'object coté User.
+            //res.statut(200).json(userObj); // affichage de l'object coté User.
+            console.log(req.body);
+            res.send('authentification success')
         } catch(e){
+            console.log(e);
             res.statut(200).json("Erreur de la création de compte").send(e);
         }
     },

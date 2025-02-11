@@ -16,7 +16,7 @@ const UserSchema = mongoosee.Schema({
         minlength: 3,
         maxlength: 50,
     },
-    userName: {
+    username: {
         type: String,
         required: true,
         unique: true
